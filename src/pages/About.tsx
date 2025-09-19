@@ -34,21 +34,21 @@ const About = () => {
 
   const team = [
     {
-      name: "María González",
-      role: "Directora Comercial",
-      image: "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=400",
+      name: "Karina Vier",
+      role: "Martillero Publico",
+      image: "/Karina-Vier.png",
       description: "15 años de experiencia en el sector inmobiliario de Misiones."
     },
     {
-      name: "Carlos Rodríguez",
-      role: "Asesor Senior",
-      image: "https://images.pexels.com/photos/3760790/pexels-photo-3760790.jpeg?auto=compress&cs=tinysrgb&w=400",
+      name: "Miguel Rodríguez",
+      role: "Tasador",
+      image: "/Miguel-Rodriguez.png",
       description: "Especialista en propiedades comerciales y residenciales de alta gama."
     },
     {
-      name: "Ana Martínez",
-      role: "Asesora Inmobiliaria",
-      image: "https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=400",
+      name: "Gabriel Rodríguez",
+      role: "Maestro mayor de obra",
+      image: "/Gabriel-Rodriguez.png",
       description: "Experta en primeras viviendas y asesoramiento crediticio."
     }
   ];
@@ -63,7 +63,7 @@ const About = () => {
               Quiénes Somos
             </h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto">
-              Somos más que una inmobiliaria: somos tu aliado para encontrar el lugar donde querés estar. Con experiencia, confianza y un profundo amor por nuestra ciudad, hacemos que cada operación sea un paso seguro hacia tus metas.
+            Somos una inmobiliaria con raíces profundas en Puerto Iguazú. Nuestro equipo combina experiencia, profesionalismo y un trato humano para ofrecer un servicio integral que abarca compra/venta de propiedades, administración de alquileres, tasaciones e informes de valuación. Nuestra filosofía se basa en escuchar, asesorar y acompañar, brindando respuestas concretas y personalizadas para cada necesidad.
             </p>
           </div>
         </div>
@@ -175,7 +175,7 @@ const About = () => {
                 <img
                   src={member.image}
                   alt={member.name}
-                  className="w-full h-64 object-cover"
+                  className="w-full object-cover"
                 />
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-900 mb-1">{member.name}</h3>

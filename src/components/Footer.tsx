@@ -19,8 +19,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-gray-200 mb-3 max-w-md font-lato">
-              Tu inmobiliaria de confianza en Misiones. Especialistas en propiedades residenciales y comerciales 
-              con más de 10 años de experiencia en el mercado local.
+              Seguridad y confianza, respaldando tu inversión
             </p>
             <div className="flex space-x-4">
               <a
