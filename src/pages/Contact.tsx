@@ -16,28 +16,28 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Teléfono",
-      details: "(0376) 4-123456",
-      action: "tel:+543764123456",
+      details: "(3757) 501460",
+      action: "tel:+543757501460",
       color: "text-[#1F5F2D]"
     },
     {
       icon: MessageCircle,
       title: "WhatsApp",
-      details: "+54 376 4-123456",
-      action: "https://wa.me/543764123456",
+      details: "+54 3757-501460",
+      action: "https://wa.me/543757501460",
       color: "text-[#25D366]"
     },
     {
       icon: Mail,
       title: "Email",
-      details: "info@iguazuinmuebles.com",
-      action: "mailto:info@iguazuinmuebles.com",
+      details: "inmobiliaria@iguazuinmuebles.com",
+      action: "mailto:inmobiliaria@iguazuinmuebles.com",
       color: "text-[#8B1E1E]"
     },
     {
       icon: MapPin,
       title: "Dirección",
-      details: "Av. Corrientes 1234, Posadas, Misiones",
+      details: "Julio Silveira 103, Puerto Iguazú, Misiones",
       action: "#",
       color: "text-[#FFD700]"
     }
@@ -133,7 +133,7 @@ const Contact = () => {
                     name="mobile"
                     maxLength={40}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
-                    placeholder="(0376) 4-123456"
+                    placeholder="(3757) 501460"
                   />
                 </div>
 
@@ -160,7 +160,35 @@ const Contact = () => {
                 </button>
               </form>
             </div>
+            {/* Map Section */}
+        <div className="mt-8">
+          <div className="bg-white rounded-xl shadow-lg p-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Nuestra Ubicación</h2>
+            
+            <div className="text-center">
+              <div className="flex items-center justify-center text-gray-600 mb-2">
+                <MapPin className="w-5 h-5 mr-2 text-[#8B1E1E]" />
+                <span className="font-medium">Julio Silveira 103 N 3370, Puerto Iguazú, Misiones</span>
+              </div>
+              <p className="text-sm text-gray-500">
+                Estamos ubicados en el corazón de Puerto Iguazú, cerca de las principales atracciones turísticas.
+              </p>
+              <div className="mt-4">
+                <a
+                  href="https://maps.app.goo.gl/kenK3ed43tnCCwUz7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-2 bg-[#8B1E1E] text-white px-6 py-3 rounded-lg hover:bg-[#a52525] transition-colors duration-200"
+                >
+                  <MapPin className="w-5 h-5" />
+                  <span>Ver en Google Maps</span>
+                </a>
+              </div>
+            </div>
           </div>
+        </div>
+          </div>
+          
 
           {/* Contact Information */}
           <div className="lg:col-span-1">
@@ -210,14 +238,14 @@ const Contact = () => {
               
               <div className="space-y-3">
                 <a
-                  href="tel:+543764123456"
+                  href="tel:+543757501460"
                   className="w-full flex items-center justify-center space-x-2 bg-[#1F5F2D] text-white px-4 py-3 rounded-lg hover:bg-[#2a7a3a] transition-colors duration-200"
                 >
                   <Phone className="w-5 h-5" />
                   <span>Llamar Ahora</span>
                 </a>
                 <a
-                  href="https://wa.me/543764123456"
+                  href="https://wa.me/543757501460"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center space-x-2 bg-[#25D366] text-white px-4 py-3 rounded-lg hover:bg-[#20b858] transition-colors duration-200"
@@ -252,35 +280,10 @@ const Contact = () => {
               </div>
             </div>
           </div>
+          
         </div>
 
-        {/* Map Section */}
-        <div className="mt-16">
-          <div className="bg-white rounded-xl shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Nuestra Ubicación</h2>
-            
-            <div className="text-center">
-              <div className="flex items-center justify-center text-gray-600 mb-2">
-                <MapPin className="w-5 h-5 mr-2 text-[#8B1E1E]" />
-                <span className="font-medium">Julio Silveira 103 N 3370, Puerto Iguazú, Misiones</span>
-              </div>
-              <p className="text-sm text-gray-500">
-                Estamos ubicados en el corazón de Puerto Iguazú, cerca de las principales atracciones turísticas.
-              </p>
-              <div className="mt-4">
-                <a
-                  href="https://maps.app.goo.gl/kenK3ed43tnCCwUz7"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 bg-[#8B1E1E] text-white px-6 py-3 rounded-lg hover:bg-[#a52525] transition-colors duration-200"
-                >
-                  <MapPin className="w-5 h-5" />
-                  <span>Ver en Google Maps</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </div>
   );

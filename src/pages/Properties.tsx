@@ -216,22 +216,41 @@ const Properties = () => {
     placeholder: string;
     className?: string;
   }) => {
-    const [isOpen, setIsOpen] = useState(false);
     const selectedOption = options.find(option => option.value === value);
+    const isOpen = openDropdown === name;
+
+    const handleToggle = () => {
+      setOpenDropdown(isOpen ? null : name);
+    };
 
     const handleSelect = (optionValue: string) => {
       const syntheticEvent = {
         target: { name, value: optionValue }
       } as React.ChangeEvent<HTMLSelectElement>;
       onChange(syntheticEvent);
-      setIsOpen(false);
+      setOpenDropdown(null);
     };
 
+    // Cerrar dropdown al hacer click fuera
+    useEffect(() => {
+      const handleClickOutside = (event: MouseEvent) => {
+        const target = event.target as Element;
+        if (isOpen && !target.closest(`[data-dropdown="${name}"]`)) {
+          setOpenDropdown(null);
+        }
+      };
+
+      if (isOpen) {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+      }
+    }, [isOpen, name]);
+
     return (
-      <div className={`relative ${className}`}>
+      <div className={`relative ${className}`} data-dropdown={name}>
         <button
           type="button"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={handleToggle}
           className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-[#8B1E1E] focus:border-[#8B1E1E] transition-colors duration-200 bg-white text-left flex items-center justify-between text-sm"
         >
           <span className={selectedOption ? "text-gray-900" : "text-gray-500"}>

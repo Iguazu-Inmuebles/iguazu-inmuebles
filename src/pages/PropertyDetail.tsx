@@ -326,17 +326,29 @@ const PropertyDetail = () => {
               </div>
             </div>
 
-            {/* Map */}
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Ubicación</h3>
-              <div className="bg-gray-200 rounded-lg h-64 flex items-center justify-center">
-                <div className="text-center text-gray-600">
-                  <MapPin className="w-12 h-12 mx-auto mb-2" />
-                  <p>Mapa interactivo</p>
-                  <p className="text-sm">{property.address}</p>
+            {/* Google Maps Button Section */}
+            {property.google_maps_link && (
+              <div className="bg-white rounded-xl shadow-lg p-8">
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Ubicación</h3>
+                
+                <div className="flex items-center justify-between">
+                  <div className="text-gray-600">
+                    <p className="font-medium">{property.address}</p>
+                    <p>{property.neighborhood && `${property.neighborhood}, `}{property.city}, {property.province}</p>
+                  </div>
+                  
+                  <a
+                    href={property.google_maps_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-[#1F5F2D] text-white px-6 py-3 rounded-lg hover:bg-[#2a7a3a] transition-colors duration-200 flex items-center space-x-2 font-medium"
+                  >
+                    <MapPin className="h-5 w-5" />
+                    <span>Ver en Google Maps</span>
+                  </a>
                 </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Sidebar */}
@@ -356,14 +368,14 @@ const PropertyDetail = () => {
               {/* Contact Buttons */}
               <div className="space-y-2 mb-4">
                 <a
-                  href="tel:+543764123456"
+                  href="tel:+543757501460"
                   className="w-full flex items-center justify-center space-x-2 bg-[#1F5F2D] text-white px-4 py-2.5 rounded-lg hover:bg-[#2a7a3a] transition-colors duration-200"
                 >
                   <Phone className="w-5 h-5" />
                   <span>Llamar Ahora</span>
                 </a>
                 <a
-                  href={`https://wa.me/543764123456?text=${encodeURIComponent(`¡Hola! Me interesa la propiedad ${property.property_code || `IG-${property.id.slice(-4).toUpperCase()}`} - ${property.title}. ¿Podrían darme más información?`)}`}
+                  href={`https://wa.me/543757501460?text=${encodeURIComponent(`¡Hola! Me interesa la propiedad ${property.property_code || `IG-${property.id.slice(-4).toUpperCase()}`} - ${property.title}. ¿Podrían darme más información?`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center space-x-2 bg-[#25D366] text-white px-4 py-2.5 rounded-lg hover:bg-[#20b858] transition-colors duration-200"

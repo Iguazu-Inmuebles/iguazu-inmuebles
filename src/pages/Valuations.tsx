@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calculator, CheckCircle, Home, MapPin, Phone, MessageCircle, Clock, Award } from 'lucide-react';
+import { Calculator, CheckCircle, Home, MapPin, Phone, MessageCircle, Clock, Award, AlarmCheck, HandHelping } from 'lucide-react';
 
 const Valuations = () => {
   const [formData, setFormData] = useState({
@@ -73,9 +73,9 @@ const Valuations = () => {
       description: "Realizada por profesionales matriculados con amplia experiencia en el mercado local"
     },
     {
-      icon: Clock,
-      title: "Respuesta Rápida",
-      description: "Recibe tu tasación en un plazo máximo de 48 horas hábiles"
+      icon: HandHelping,
+      title: "Coordinación de Visita",
+      description: "Coordinamos una visita para evaluar la propiedad y discutir los detalles"
     },
     {
       icon: Home,
@@ -85,7 +85,7 @@ const Valuations = () => {
     {
       icon: CheckCircle,
       title: "Sin Compromiso",
-      description: "Tasación gratuita y sin obligación de contratar nuestros servicios"
+      description: "Tasación sin obligación de contratar nuestros servicios"
     }
   ];
 
@@ -123,7 +123,7 @@ const Valuations = () => {
               Tasación de Propiedades
             </h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto">
-              Conoce el valor real de tu propiedad con nuestra tasación profesional gratuita
+              Conoce el valor real de tu propiedad con nuestra tasación profesional 
             </p>
           </div>
         </div>
@@ -150,7 +150,7 @@ const Valuations = () => {
           {/* Valuation Form */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-xl shadow-lg p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Solicitar Tasación Gratuita</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Solicitar Tasación </h2>
               
               {isSubmitted ? (
                 <div className="text-center py-8">
@@ -205,7 +205,7 @@ const Valuations = () => {
                           value={formData.phone}
                           onChange={handleInputChange}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
-                          placeholder="(0376) 4-123456"
+                          placeholder="(3757) 501460"
                         />
                       </div>
                     </div>
@@ -440,7 +440,7 @@ const Valuations = () => {
                     className="w-full bg-[#8B1E1E] text-white px-6 py-3 rounded-lg hover:bg-[#a52525] transition-colors duration-200 flex items-center justify-center space-x-2"
                   >
                     <Calculator className="w-5 h-5" />
-                    <span>Solicitar Tasación Gratuita</span>
+                    <span>Solicitar Tasación </span>
                   </button>
                 </form>
               )}
@@ -458,14 +458,14 @@ const Valuations = () => {
               
               <div className="space-y-3">
                 <a
-                  href="tel:+543764123456"
+                  href="tel:+543757501460"
                   className="w-full flex items-center justify-center space-x-2 bg-[#1F5F2D] text-white px-4 py-3 rounded-lg hover:bg-[#2a7a3a] transition-colors duration-200"
                 >
                   <Phone className="w-5 h-5" />
                   <span>Llamar Ahora</span>
                 </a>
                 <a
-                  href="https://wa.me/543764123456"
+                  href="https://wa.me/543757501460"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center space-x-2 bg-[#25D366] text-white px-4 py-3 rounded-lg hover:bg-[#20b858] transition-colors duration-200"

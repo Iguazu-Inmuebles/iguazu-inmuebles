@@ -45,6 +45,7 @@ export interface Property {
   featured: boolean;
   status: 'available' | 'sold' | 'rented';
   cover_image_id?: string;
+  google_maps_link?: string;
   created_at: string;
   updated_at: string;
   property_images?: PropertyImage[];

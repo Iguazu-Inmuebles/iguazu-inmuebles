@@ -63,6 +63,7 @@ interface FormData {
   featured: boolean;
   status: string;
   currency: string;
+  google_maps_link: string;
   imageUrls: string[];
 }
 
@@ -101,6 +102,7 @@ const Admin = () => {
     featured: false,
     status: 'available',
     currency: 'ARS',
+    google_maps_link: '',
     imageUrls: ['']
   });
 
@@ -314,6 +316,7 @@ const Admin = () => {
         featured: formData.featured,
         status: formData.status,
         currency: formData.currency,
+        google_maps_link: formData.google_maps_link || null,
         updated_at: new Date().toISOString()
       };
 
@@ -425,6 +428,7 @@ const Admin = () => {
       featured: property.featured || false,
       status: property.status || 'available',
       currency: property.currency || 'ARS',
+      google_maps_link: property.google_maps_link || '',
       imageUrls: existingUrls.length > 0 ? existingUrls : ['']
     });
     setShowForm(true);
@@ -475,6 +479,7 @@ const Admin = () => {
       featured: false,
       status: 'available',
       currency: 'ARS',
+      google_maps_link: '',
       imageUrls: ['']
     });
     setEditingProperty(null);
@@ -906,6 +911,23 @@ const Admin = () => {
                       placeholder="Calle y número"
                       required
                     />
+                  </div>
+
+                  {/* Link de Google Maps */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Link de Google Maps
+                    </label>
+                    <input
+                      type="url"
+                      value={formData.google_maps_link}
+                      onChange={(e) => setFormData({ ...formData, google_maps_link: e.target.value })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
+                      placeholder="https://maps.google.com/..."
+                    />
+                    <p className="mt-1 text-sm text-gray-500">
+                      Opcional: Enlace directo a Google Maps para mostrar el botón "Ver en Google Maps"
+                    </p>
                   </div>
 
                   {/* Características numéricas */}

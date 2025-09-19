@@ -57,7 +57,7 @@ const AdminConfig = () => {
   const [zoneForm, setZoneForm] = useState({
     name: '',
     code: '',
-    city: 'Posadas',
+    city: 'Iguazú',
     province: 'Misiones',
     is_active: true
   });
@@ -220,7 +220,7 @@ const AdminConfig = () => {
     setZoneForm({
       name: '',
       code: '',
-      city: 'Posadas',
+      city: 'Iguazú',
       province: 'Misiones',
       is_active: true
     });
