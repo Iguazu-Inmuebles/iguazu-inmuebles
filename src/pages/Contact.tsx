@@ -44,8 +44,8 @@ const Contact = () => {
   ];
 
   const businessHours = [
-    { day: "Lunes a Viernes", hours: "9:00 - 18:00" },
-    { day: "Sábados", hours: "9:00 - 13:00" },
+    { day: "Lunes a Viernes", hours: "8:00 - 12:00 y 15:00 - 19:00" },
+    { day: "Sábados", hours: "9:00 - 12:00" },
     { day: "Domingos", hours: "Cerrado" }
   ];
 
