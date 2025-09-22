@@ -23,7 +23,7 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/share/17Ds6wSLoN/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-[#FFD700] transition-colors duration-200"
@@ -31,7 +31,7 @@ const Footer = () => {
                 <Facebook className="w-6 h-6" />
               </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/iguazuinmuebles?igsh=MjZpanpyaDlzdWZq"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-[#FFD700] transition-colors duration-200"
@@ -79,18 +79,18 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <MapPin className="w-5 h-5 text-[#1F5F2D]" />
-                <span className="text-gray-300 font-lato">Julio Silveira 103, Puerto Iguazú, Misiones</span>
+                <span className="text-gray-300 font-lato">Av. Corrientes 1234, Posadas</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-[#1F5F2D]" />
-                <a href="tel:+543757501460" className="text-gray-300 hover:text-white transition-colors duration-200 font-lato">
-                  (3757) 501460
+                <a href="tel:+543764123456" className="text-gray-300 hover:text-white transition-colors duration-200 font-lato">
+                  (0376) 4-123456
                 </a>
               </div>
               <div className="flex items-center space-x-3">
                 <MessageCircle className="w-5 h-5 text-[#25D366]" />
                 <a 
-                  href="https://wa.me/543757501460" 
+                  href="https://wa.me/543764123456" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-white transition-colors duration-200 font-lato"
@@ -100,8 +100,8 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-[#8B1E1E]" />
-                <a href="mailto:inmobiliaria@iguazuinmuebles.com" className="text-gray-300 hover:text-white transition-colors duration-200 font-lato">
-                  inmobiliaria@iguazuinmuebles.com
+                <a href="mailto:info@iguazuinmuebles.com" className="text-gray-300 hover:text-white transition-colors duration-200 font-lato">
+                  info@iguazuinmuebles.com
                 </a>
               </div>
             </div>

@@ -3,39 +3,20 @@ import { Calculator, CheckCircle, Home, MapPin, Phone, MessageCircle, Clock, Awa
 
 const Valuations = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    first_name: '',
+    last_name: '',
     email: '',
     phone: '',
-    propertyType: '',
-    address: '',
-    neighborhood: '',
-    area: '',
-    bedrooms: '',
-    bathrooms: '',
-    garage: false,
-    pool: false,
-    garden: false,
-    age: '',
-    condition: '',
-    urgency: '',
-    comments: ''
+    description: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target;
-    if (type === 'checkbox') {
-      const checked = (e.target as HTMLInputElement).checked;
-      setFormData(prev => ({
-        ...prev,
-        [name]: checked
-      }));
-    } else {
-      setFormData(prev => ({
-        ...prev,
-        [name]: value
-      }));
-    }
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -161,24 +142,44 @@ const Valuations = () => {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DgK000006UN3l" method="POST" className="space-y-6">
+                  <input type="hidden" name="oid" value="00DgK000006UN3l" />
+                  <input type="hidden" name="retURL" value="https://iguazuinmuebles.com" />
+                  <input type="hidden" name="lead_source" value="Web" />
+                  <input type="hidden" name="company" value="Web Tasaciónes" />
+                  <input type="hidden" name="00NgK00001tNhdy" value="0" />
+                  <input type="hidden" name="00NgK00001tQepd" value="1" />
                   {/* Personal Information */}
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Información Personal</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Nombre completo *
+                          Nombre *
                         </label>
                         <input
                           type="text"
-                          name="name"
+                          name="first_name"
                           required
                           value={formData.name}
                           onChange={handleInputChange}
                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
-                          placeholder="Tu nombre completo"
+                          placeholder="Tu nombre"
                         />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Apellido *
+                        </label>
+                        <input
+                           type="text"
+                           name="last_name"
+                           required
+                           value={formData.last_name}
+                           onChange={handleInputChange}
+                           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
+                           placeholder="Tu apellido"
+                         />
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -194,7 +195,7 @@ const Valuations = () => {
                           placeholder="tu@email.com"
                         />
                       </div>
-                      <div className="md:col-span-2">
+                      <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           Teléfono *
                         </label>
@@ -211,214 +212,7 @@ const Valuations = () => {
                     </div>
                   </div>
 
-                  {/* Property Information */}
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Información de la Propiedad</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Tipo de propiedad *
-                        </label>
-                        <select
-                          name="propertyType"
-                          required
-                          value={formData.propertyType}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
-                        >
-                          <option value="">Selecciona el tipo</option>
-                          <option value="casa">Casa</option>
-                          <option value="departamento">Departamento</option>
-                          <option value="terreno">Terreno</option>
-                          <option value="local">Local comercial</option>
-                          <option value="oficina">Oficina</option>
-                          <option value="quinta">Quinta/Chacra</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Barrio/Zona *
-                        </label>
-                        <select
-                          name="neighborhood"
-                          required
-                          value={formData.neighborhood}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
-                        >
-                          <option value="">Selecciona la zona</option>
-                          <option value="centro">Centro</option>
-                          <option value="barrio-jardin">Barrio Jardín</option>
-                          <option value="villa-cabello">Villa Cabello</option>
-                          <option value="san-lorenzo">San Lorenzo</option>
-                          <option value="itaembe-mini">Itaembé Miní</option>
-                          <option value="villa-urquiza">Villa Urquiza</option>
-                          <option value="otro">Otro</option>
-                        </select>
-                      </div>
-                      <div className="md:col-span-2">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Dirección *
-                        </label>
-                        <input
-                          type="text"
-                          name="address"
-                          required
-                          value={formData.address}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
-                          placeholder="Dirección completa"
-                        />
-                      </div>
-                    </div>
-                  </div>
 
-                  {/* Property Details */}
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Detalles de la Propiedad</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Superficie (m²) *
-                        </label>
-                        <input
-                          type="number"
-                          name="area"
-                          required
-                          value={formData.area}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
-                          placeholder="120"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Dormitorios
-                        </label>
-                        <select
-                          name="bedrooms"
-                          value={formData.bedrooms}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
-                        >
-                          <option value="">Seleccionar</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5+">5+</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Baños
-                        </label>
-                        <select
-                          name="bathrooms"
-                          value={formData.bathrooms}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
-                        >
-                          <option value="">Seleccionar</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4+">4+</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Antigüedad (años)
-                        </label>
-                        <select
-                          name="age"
-                          value={formData.age}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
-                        >
-                          <option value="">Seleccionar</option>
-                          <option value="0-5">0-5 años</option>
-                          <option value="6-10">6-10 años</option>
-                          <option value="11-20">11-20 años</option>
-                          <option value="21-30">21-30 años</option>
-                          <option value="30+">Más de 30 años</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Estado general
-                        </label>
-                        <select
-                          name="condition"
-                          value={formData.condition}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
-                        >
-                          <option value="">Seleccionar</option>
-                          <option value="excelente">Excelente</option>
-                          <option value="muy-bueno">Muy bueno</option>
-                          <option value="bueno">Bueno</option>
-                          <option value="regular">Regular</option>
-                          <option value="refaccionar">A refaccionar</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Urgencia
-                        </label>
-                        <select
-                          name="urgency"
-                          value={formData.urgency}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
-                        >
-                          <option value="">Seleccionar</option>
-                          <option value="inmediata">Inmediata</option>
-                          <option value="1-mes">En 1 mes</option>
-                          <option value="3-meses">En 3 meses</option>
-                          <option value="6-meses">En 6 meses</option>
-                          <option value="sin-urgencia">Sin urgencia</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Additional Features */}
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Características Adicionales</h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                      <label className="flex items-center space-x-2">
-                        <input
-                          type="checkbox"
-                          name="garage"
-                          checked={formData.garage}
-                          onChange={handleInputChange}
-                          className="rounded border-gray-300 text-[#8B1E1E] focus:ring-[#8B1E1E]"
-                        />
-                        <span className="text-sm text-gray-700">Cochera</span>
-                      </label>
-                      <label className="flex items-center space-x-2">
-                        <input
-                          type="checkbox"
-                          name="pool"
-                          checked={formData.pool}
-                          onChange={handleInputChange}
-                          className="rounded border-gray-300 text-[#8B1E1E] focus:ring-[#8B1E1E]"
-                        />
-                        <span className="text-sm text-gray-700">Piscina</span>
-                      </label>
-                      <label className="flex items-center space-x-2">
-                        <input
-                          type="checkbox"
-                          name="garden"
-                          checked={formData.garden}
-                          onChange={handleInputChange}
-                          className="rounded border-gray-300 text-[#8B1E1E] focus:ring-[#8B1E1E]"
-                        />
-                        <span className="text-sm text-gray-700">Jardín</span>
-                      </label>
-                    </div>
-                  </div>
 
                   {/* Comments */}
                   <div>
@@ -426,7 +220,7 @@ const Valuations = () => {
                       Comentarios adicionales
                     </label>
                     <textarea
-                      name="comments"
+                      name="description"
                       rows={4}
                       value={formData.comments}
                       onChange={handleInputChange}

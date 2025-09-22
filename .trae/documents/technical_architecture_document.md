@@ -31,84 +31,100 @@ graph TD
 
 ## 2. Descripción de Tecnologías
 
-- **Frontend**: React@18 + TypeScript + Vite + TailwindCSS@3
-- **Backend**: Supabase (Backend-as-a-Service)
-- **Base de Datos**: PostgreSQL (proporcionada por Supabase)
-- **Autenticación**: Supabase Auth
-- **Enrutamiento**: React Router DOM@7
-- **Iconografía**: Lucide React
-- **Notificaciones**: React Hot Toast
-- **Estilos**: TailwindCSS con configuración personalizada
+* **Frontend**: React\@18 + TypeScript + Vite + TailwindCSS\@3
+
+* **Backend**: Supabase (Backend-as-a-Service)
+
+* **Base de Datos**: PostgreSQL (proporcionada por Supabase)
+
+* **Autenticación**: Supabase Auth
+
+* **Enrutamiento**: React Router DOM\@7
+
+* **Iconografía**: Lucide React
+
+* **Notificaciones**: React Hot Toast
+
+* **Estilos**: TailwindCSS con configuración personalizada
 
 ## 3. Definiciones de Rutas
 
-| Ruta | Propósito |
-|------|----------|
-| / | Página de inicio con hero section y propiedades destacadas |
-| /propiedades | Listado completo de propiedades con filtros avanzados |
-| /propiedades/:id | Página de detalle de una propiedad específica |
-| /quienes-somos | Información sobre la empresa inmobiliaria |
-| /contacto | Formulario de contacto y datos de la empresa |
-| /tasaciones | Formulario para solicitar tasaciones de propiedades |
-| /admin | Panel de administración para gestión de propiedades |
-| /admin/config | Configuración del sistema administrativo |
+| Ruta             | Propósito                                                  |
+| ---------------- | ---------------------------------------------------------- |
+| /                | Página de inicio con hero section y propiedades destacadas |
+| /propiedades     | Listado completo de propiedades con filtros avanzados      |
+| /propiedades/:id | Página de detalle de una propiedad específica              |
+| /quienes-somos   | Información sobre la empresa inmobiliaria                  |
+| /contacto        | Formulario de contacto y datos de la empresa               |
+| /tasaciones      | Formulario para solicitar tasaciones de propiedades        |
+| /admin           | Panel de administración para gestión de propiedades        |
+| /admin/config    | Configuración del sistema administrativo                   |
 
 ## 4. Definiciones de API
 
 ### 4.1 API Principal de Supabase
 
 **Autenticación de usuarios**
+
 ```
 POST /auth/v1/token
 ```
 
 Request:
-| Nombre del Parámetro | Tipo de Parámetro | Es Requerido | Descripción |
-|---------------------|-------------------|--------------|-------------|
-| email | string | true | Email del administrador |
-| password | string | true | Contraseña del administrador |
+
+| Nombre del Parámetro | Tipo de Parámetro | Es Requerido | Descripción                  |
+| -------------------- | ----------------- | ------------ | ---------------------------- |
+| email                | string            | true         | Email del administrador      |
+| password             | string            | true         | Contraseña del administrador |
 
 Response:
-| Nombre del Parámetro | Tipo de Parámetro | Descripción |
-|---------------------|-------------------|-------------|
-| access_token | string | Token de acceso JWT |
-| user | object | Información del usuario autenticado |
+
+| Nombre del Parámetro | Tipo de Parámetro | Descripción                         |
+| -------------------- | ----------------- | ----------------------------------- |
+| access\_token        | string            | Token de acceso JWT                 |
+| user                 | object            | Información del usuario autenticado |
 
 **Obtener propiedades**
+
 ```
 GET /rest/v1/properties
 ```
 
 Query Parameters:
-| Nombre del Parámetro | Tipo de Parámetro | Es Requerido | Descripción |
-|---------------------|-------------------|--------------|-------------|
-| select | string | false | Campos a seleccionar |
-| status | string | false | Filtro por estado de la propiedad |
-| operation | string | false | Filtro por tipo de operación (venta/alquiler) |
-| property_type | string | false | Filtro por tipo de propiedad |
+
+| Nombre del Parámetro | Tipo de Parámetro | Es Requerido | Descripción                                   |
+| -------------------- | ----------------- | ------------ | --------------------------------------------- |
+| select               | string            | false        | Campos a seleccionar                          |
+| status               | string            | false        | Filtro por estado de la propiedad             |
+| operation            | string            | false        | Filtro por tipo de operación (venta/alquiler) |
+| property\_type       | string            | false        | Filtro por tipo de propiedad                  |
 
 Response:
-| Nombre del Parámetro | Tipo de Parámetro | Descripción |
-|---------------------|-------------------|-------------|
-| data | array | Array de propiedades |
-| count | number | Número total de registros |
+
+| Nombre del Parámetro | Tipo de Parámetro | Descripción               |
+| -------------------- | ----------------- | ------------------------- |
+| data                 | array             | Array de propiedades      |
+| count                | number            | Número total de registros |
 
 **Crear/Actualizar propiedad**
+
 ```
 POST /rest/v1/properties
 PATCH /rest/v1/properties
 ```
 
 Request:
-| Nombre del Parámetro | Tipo de Parámetro | Es Requerido | Descripción |
-|---------------------|-------------------|--------------|-------------|
-| title | string | true | Título de la propiedad |
-| price | number | true | Precio de la propiedad |
-| operation | string | true | Tipo de operación (venta/alquiler) |
-| property_type | string | true | Tipo de propiedad |
-| address | string | true | Dirección de la propiedad |
+
+| Nombre del Parámetro | Tipo de Parámetro | Es Requerido | Descripción                        |
+| -------------------- | ----------------- | ------------ | ---------------------------------- |
+| title                | string            | true         | Título de la propiedad             |
+| price                | number            | true         | Precio de la propiedad             |
+| operation            | string            | true         | Tipo de operación (venta/alquiler) |
+| property\_type       | string            | true         | Tipo de propiedad                  |
+| address              | string            | true         | Dirección de la propiedad          |
 
 Ejemplo:
+
 ```json
 {
   "title": "Casa en Barrio Jardín",
@@ -231,6 +247,7 @@ erDiagram
 ### 6.2 Lenguaje de Definición de Datos (DDL)
 
 **Tabla de Propiedades (properties)**
+
 ```sql
 -- Crear tabla de propiedades
 CREATE TABLE IF NOT EXISTS properties (
@@ -288,7 +305,8 @@ CREATE POLICY "Enable delete for authenticated users"
   ON properties FOR DELETE TO authenticated USING (true);
 ```
 
-**Tabla de Imágenes de Propiedades (property_images)**
+**Tabla de Imágenes de Propiedades (property\_images)**
+
 ```sql
 -- Crear tabla de imágenes
 CREATE TABLE IF NOT EXISTS property_images (
@@ -346,3 +364,4 @@ INSERT INTO properties (
   true
 );
 ```
+

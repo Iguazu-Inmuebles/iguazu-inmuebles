@@ -368,14 +368,14 @@ const PropertyDetail = () => {
               {/* Contact Buttons */}
               <div className="space-y-2 mb-4">
                 <a
-                  href="tel:+543757501460"
+                  href="tel:+543764123456"
                   className="w-full flex items-center justify-center space-x-2 bg-[#1F5F2D] text-white px-4 py-2.5 rounded-lg hover:bg-[#2a7a3a] transition-colors duration-200"
                 >
                   <Phone className="w-5 h-5" />
                   <span>Llamar Ahora</span>
                 </a>
                 <a
-                  href={`https://wa.me/543757501460?text=${encodeURIComponent(`¡Hola! Me interesa la propiedad ${property.property_code || `IG-${property.id.slice(-4).toUpperCase()}`} - ${property.title}. ¿Podrían darme más información?`)}`}
+                  href={`https://wa.me/543764123456?text=${encodeURIComponent(`¡Hola! Me interesa la propiedad ${property.property_code || `IG-${property.id.slice(-4).toUpperCase()}`} - ${property.title}. ¿Podrían darme más información?`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center space-x-2 bg-[#25D366] text-white px-4 py-2.5 rounded-lg hover:bg-[#20b858] transition-colors duration-200"

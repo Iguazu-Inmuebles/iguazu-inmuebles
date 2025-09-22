@@ -78,7 +78,11 @@ const Contact = () => {
                 className="space-y-6"
               >
                 <input type="hidden" name="oid" value="00DgK000006UN3l" />
-                <input type="hidden" name="retURL" value="https://beautiful-beignet-dc32c2.netlify.app" />
+                <input type="hidden" name="retURL" value="https://iguazuinmuebles.com" />
+                <input type="hidden" name="lead_source" value="Web" />
+                <input type="hidden" name="company" value="Web Contacto" />
+                <input type="hidden" name="00NgK00001tNhdy" value="1" />
+                <input type="hidden" name="00NgK00001tQepd" value="0" />
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -90,6 +94,7 @@ const Contact = () => {
                       id="first_name"
                       name="first_name"
                       maxLength={40}
+                      required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
                       placeholder="Tu nombre"
                     />
@@ -103,6 +108,7 @@ const Contact = () => {
                       id="last_name"
                       name="last_name"
                       maxLength={80}
+                      required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
                       placeholder="Tu apellido"
                     />
@@ -114,10 +120,11 @@ const Contact = () => {
                     Email
                   </label>
                   <input
-                    type="text"
+                    type="email"
                     id="email"
                     name="email"
                     maxLength={80}
+                    required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
                     placeholder="tu@email.com"
                   />
@@ -128,10 +135,11 @@ const Contact = () => {
                     Teléfono
                   </label>
                   <input
-                    type="text"
+                    type="tel"
                     id="mobile"
-                    name="mobile"
+                    name="phone"
                     maxLength={40}
+                    required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
                     placeholder="(3757) 501460"
                   />
@@ -145,6 +153,7 @@ const Contact = () => {
                     name="description"
                     id="description"
                     rows={4}
+                    required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent resize-none"
                     placeholder="Cuéntanos en qué podemos ayudarte..."
                   ></textarea>
@@ -262,7 +271,7 @@ const Contact = () => {
               
               <div className="flex space-x-4">
                 <a
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/share/17Ds6wSLoN/?mibextid=wwXIfr"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center w-12 h-12 bg-[#1877F2] text-white rounded-lg hover:bg-[#166fe5] transition-colors duration-200"
@@ -270,7 +279,7 @@ const Contact = () => {
                   <Facebook className="w-6 h-6" />
                 </a>
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/iguazuinmuebles?igsh=MjZpanpyaDlzdWZq"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-[#833AB4] to-[#E1306C] text-white rounded-lg hover:opacity-90 transition-opacity duration-200"
