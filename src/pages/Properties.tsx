@@ -8,6 +8,7 @@ const Properties = () => {
   const [zones, setZones] = useState<PropertyZone[]>([]);
   const [features, setFeatures] = useState<PropertyFeature[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showFilters, setShowFilters] = useState(true);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -19,9 +20,7 @@ const Properties = () => {
     bathrooms: '',
     neighborhood: '',
     minPrice: '',
-    maxPrice: '',
-    conCochera: false,
-    conPiscina: false
+    maxPrice: ''
   });
 
   useEffect(() => {
@@ -32,19 +31,38 @@ const Properties = () => {
 
   const fetchProperties = async () => {
     try {
+      setLoading(true);
       const { data, error } = await supabase
         .from('properties')
         .select(`
           *,
-          property_images!property_images_property_id_fkey (*)
+          property_images!property_images_property_id_fkey(
+            id,
+            image_url,
+            order_index,
+            is_cover
+          ),
+          properties_features!properties_features_property_id_fkey(
+            feature_id,
+            property_features!properties_features_feature_id_fkey(
+              id,
+              name,
+              code
+            )
+          )
         `)
         .eq('status', 'available')
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
-      setProperties(data || []);
-    } catch (error) {
-      console.error('Error fetching properties:', error);
+      if (error) {
+        console.error('Error fetching properties:', error);
+        setError('Error al cargar las propiedades');
+      } else {
+        setProperties(data || []);
+      }
+    } catch (err) {
+      console.error('Error:', err);
+      setError('Error al cargar las propiedades');
     } finally {
       setLoading(false);
     }
@@ -111,9 +129,7 @@ const Properties = () => {
       bathrooms: '',
       neighborhood: '',
       minPrice: '',
-      maxPrice: '',
-      conCochera: false,
-      conPiscina: false
+      maxPrice: ''
     });
   };
 
@@ -179,29 +195,31 @@ const Properties = () => {
       if (property.price > maxPrice) return false;
     }
 
-    // Filtro por cochera
-    if (filters.conCochera && !property.garage) {
-      return false;
-    }
-
-    // Filtro por piscina
-    if (filters.conPiscina && !property.pool) {
-      return false;
-    }
-
-    // Filtros dinámicos por características
+    // Filtros dinámicos por características usando properties_features
     for (const feature of features) {
       const filterKey = `feature_${feature.code}` as keyof typeof filters;
       if (filters[filterKey]) {
-        // Aquí necesitarías implementar la lógica según cómo tengas relacionadas
-        // las características con las propiedades en tu base de datos
-        // Por ahora, solo verifico las características básicas que ya tienes
-        if (feature.code === 'garage' && !property.garage) return false;
-        if (feature.code === 'pool' && !property.pool) return false;
-        if (feature.code === 'garden' && !property.garden) return false;
-        if (feature.code === 'furnished' && !property.furnished) return false;
-        if (feature.code === 'pets' && !property.pets_allowed) return false;
-        if (feature.code === 'credit' && !property.credit_eligible) return false;
+        // Verificar si la propiedad tiene esta característica en properties_features
+        const hasFeature = property.properties_features?.some(
+          (pf: any) => pf.property_features?.code === feature.code
+        );
+        
+        // Debug: Log para verificar el filtrado
+        console.log(`Filtering by ${feature.name} (${feature.code}):`, {
+          propertyId: property.id,
+          propertyTitle: property.title,
+          hasFeature,
+          propertyFeatures: property.properties_features?.map((pf: any) => ({
+            featureId: pf.feature_id,
+            featureName: pf.property_features?.name,
+            featureCode: pf.property_features?.code
+          }))
+        });
+        
+        // Si no tiene la característica, excluir la propiedad
+        if (!hasFeature) {
+          return false;
+        }
       }
     }
 
@@ -552,28 +570,6 @@ const Properties = () => {
                       Características
                     </label>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-1">
-                      {/* Características básicas */}
-                      <label className="flex items-center cursor-pointer hover:bg-white p-1 rounded transition-colors duration-200">
-                        <input 
-                          type="checkbox" 
-                          name="conCochera"
-                          checked={filters.conCochera}
-                          onChange={handleFilterChange}
-                          className="w-3 h-3 rounded border-gray-300 text-[#8B1E1E] focus:ring-[#8B1E1E] mr-1.5" 
-                        />
-                        <span className="text-xs text-gray-700">Cochera</span>
-                      </label>
-                      <label className="flex items-center cursor-pointer hover:bg-white p-1 rounded transition-colors duration-200">
-                        <input 
-                          type="checkbox" 
-                          name="conPiscina"
-                          checked={filters.conPiscina}
-                          onChange={handleFilterChange}
-                          className="w-3 h-3 rounded border-gray-300 text-[#8B1E1E] focus:ring-[#8B1E1E] mr-1.5" 
-                        />
-                        <span className="text-xs text-gray-700">Piscina</span>
-                      </label>
-                      
                       {/* Características dinámicas desde la configuración */}
                       {features.map(feature => (
                         <label key={feature.id} className="flex items-center cursor-pointer hover:bg-white p-1 rounded transition-colors duration-200">

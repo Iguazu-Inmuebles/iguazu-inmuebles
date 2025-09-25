@@ -400,7 +400,7 @@ const Admin = () => {
       if (editingProperty) {
         // Eliminar características existentes
         await supabase
-          .from('property_features')
+          .from('properties_features')
           .delete()
           .eq('property_id', propertyId);
       }
@@ -413,7 +413,7 @@ const Admin = () => {
         }));
 
         const { error: featuresError } = await supabase
-          .from('property_features')
+          .from('properties_features')
           .insert(featureData);
 
         if (featuresError) throw featuresError;
@@ -437,7 +437,7 @@ const Admin = () => {
     
     // Cargar características seleccionadas de la propiedad
     const { data: propertyFeatures } = await supabase
-      .from('property_features')
+      .from('properties_features')
       .select('feature_id')
       .eq('property_id', property.id);
     
@@ -1110,32 +1110,25 @@ const Admin = () => {
                     </div>
                   </div>
 
-                  {/* Características booleanas */}
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-                    {[
-                      { key: 'credit_eligible', label: 'Apto Crédito' },
-                      { key: 'featured', label: 'Destacado' }
-                    ].map(({ key, label }) => (
-                      <div key={key} className="flex items-center">
-                        <input
-                          type="checkbox"
-                          id={key}
-                          checked={formData[key as keyof FormData] as boolean}
-                          onChange={(e) => setFormData({ ...formData, [key]: e.target.checked })}
-                          className="h-4 w-4 text-[#8B1E1E] focus:ring-[#8B1E1E] border-gray-300 rounded"
-                        />
-                        <label htmlFor={key} className="ml-2 block text-sm text-gray-900">
-                          {label}
-                        </label>
-                      </div>
-                    ))}
+                  {/* Destacado */}
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      id="featured"
+                      checked={formData.featured}
+                      onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
+                      className="h-4 w-4 text-[#8B1E1E] focus:ring-[#8B1E1E] border-gray-300 rounded"
+                    />
+                    <label htmlFor="featured" className="ml-2 block text-sm font-medium text-gray-900">
+                      Destacado
+                    </label>
                   </div>
 
-                  {/* Características adicionales configurables */}
+                  {/* Características */}
                   {features.length > 0 && (
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-4">
-                        Características Adicionales
+                        Características
                       </label>
                       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                         {features.map((feature) => (

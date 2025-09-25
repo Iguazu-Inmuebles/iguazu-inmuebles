@@ -34,19 +34,36 @@ const PropertyDetail = () => {
 
   const fetchProperty = async () => {
     try {
+      setLoading(true);
       const { data, error } = await supabase
         .from('properties')
         .select(`
           *,
-          property_images!property_images_property_id_fkey (*)
+          property_images!property_images_property_id_fkey (
+            id,
+            image_url,
+            order_index,
+            is_cover
+          ),
+          properties_features (
+            property_features (
+              id,
+              name,
+              code,
+              description
+            )
+          )
         `)
         .eq('id', id)
         .single();
 
-      if (error) throw error;
-      setProperty(data);
+      if (error) {
+        console.error('Error fetching property:', error);
+      } else {
+        setProperty(data);
+      }
     } catch (error) {
-      console.error('Error fetching property:', error);
+      console.error('Error:', error);
     } finally {
       setLoading(false);
     }
@@ -122,12 +139,10 @@ const PropertyDetail = () => {
   const images = property.property_images || [];
   const location = `${property.neighborhood ? property.neighborhood + ', ' : ''}${property.city}`;
   
-  const amenities = [
-    ...(property.credit_eligible ? [{ icon: Shield, text: "Apto crédito hipotecario" }] : []),
-    ...(property.pets_allowed ? [{ icon: Heart, text: "Acepta mascotas" }] : []),
-    ...(property.garage ? [{ icon: Car, text: "Cochera" }] : []),
-    ...(property.furnished ? [{ icon: Home, text: "Amueblado" }] : [])
-  ];
+  // Características dinámicas desde properties_features
+  const allAmenities = property.properties_features?.map((pf: any) => ({
+    text: pf.property_features?.name || ''
+  })) || [];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -266,13 +281,13 @@ const PropertyDetail = () => {
               )}
 
               {/* Amenities */}
-              {amenities.length > 0 && (
+              {allAmenities.length > 0 && (
                 <div className="mb-8">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Servicios y Comodidades</h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {amenities.map((amenity, index) => (
-                    <div key={index} className="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg">
-                      <amenity.icon className="w-8 h-8 text-[#1F5F2D] mb-2" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {allAmenities.map((amenity, index) => (
+                    <div key={index} className="flex items-center p-2 bg-gray-50 rounded-lg">
+                      <div className="w-2 h-2 bg-[#1F5F2D] rounded-full mr-3 flex-shrink-0"></div>
                       <span className="text-sm text-gray-700">{amenity.text}</span>
                     </div>
                   ))}
