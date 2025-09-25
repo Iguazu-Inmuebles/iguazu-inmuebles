@@ -323,6 +323,8 @@ const Admin = () => {
         status: formData.status,
         currency: formData.currency,
         google_maps_link: formData.google_maps_link || null,
+        expenses: formData.expenses || null,
+        age: formData.age || null,
         updated_at: new Date().toISOString()
       };
 
