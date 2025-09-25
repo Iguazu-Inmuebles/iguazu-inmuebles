@@ -148,7 +148,7 @@ const FeaturedProperties = () => {
                 {/* Price and Button */}
                 <div className="flex items-center justify-between">
                   <div className="text-2xl font-bold text-[#8B1E1E]">
-                    {formatPrice(property.price, property.currency || 'ARS')}
+                    {property.price === 0 ? 'Consultar Valor' : formatPrice(property.price, property.currency || 'ARS')}
                   </div>
                   <Link
                     to={`/propiedades/${property.id}`}

@@ -245,7 +245,7 @@ const PropertyDetail = () => {
               <h1 className="text-3xl font-bold text-gray-900 mb-4">{property.title}</h1>
               
               <div className="text-4xl font-bold text-[#8B1E1E] mb-6">
-                {formatPrice(property.price, property.currency || 'ARS')}
+                {property.price ? formatPrice(property.price, property.currency || 'ARS') : 'Consultar Valor'}
               </div>
 
               {/* Quick Stats */}

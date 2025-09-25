@@ -186,13 +186,13 @@ const Properties = () => {
     // Filtro por precio mínimo
     if (filters.minPrice) {
       const minPrice = parseFloat(filters.minPrice);
-      if (property.price < minPrice) return false;
+      if (!property.price || property.price < minPrice) return false;
     }
 
     // Filtro por precio máximo
     if (filters.maxPrice) {
       const maxPrice = parseFloat(filters.maxPrice);
-      if (property.price > maxPrice) return false;
+      if (!property.price || property.price > maxPrice) return false;
     }
 
     // Filtros dinámicos por características usando properties_features
@@ -362,7 +362,7 @@ const Properties = () => {
         {/* Price and Button */}
         <div className={`flex items-center justify-between ${isListView ? 'mt-auto' : ''}`}>
           <div className="text-lg font-bold text-[#8B1E1E]">
-            {formatPrice(property.price, property.currency || 'ARS')}
+            {property.price ? formatPrice(property.price, property.currency || 'ARS') : 'Consultar Valor'}
           </div>
           <Link
             to={`/propiedades/${property.id}`}
