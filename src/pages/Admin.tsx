@@ -66,6 +66,8 @@ interface FormData {
   google_maps_link: string;
   imageUrls: string[];
   selectedFeatures?: string[];
+  expenses?: string;
+  age?: number;
 }
 
 const Admin = () => {
@@ -104,7 +106,10 @@ const Admin = () => {
     status: 'available',
     currency: 'ARS',
     google_maps_link: '',
-    imageUrls: ['']
+    imageUrls: [''],
+    selectedFeatures: [],
+    expenses: '',
+    age: 0
   });
 
   // Verificar autenticación al cargar el componente
@@ -430,7 +435,10 @@ const Admin = () => {
       status: property.status || 'available',
       currency: property.currency || 'ARS',
       google_maps_link: property.google_maps_link || '',
-      imageUrls: existingUrls.length > 0 ? existingUrls : ['']
+      imageUrls: existingUrls.length > 0 ? existingUrls : [''],
+      selectedFeatures: [],
+      expenses: (property as any).expenses || '',
+      age: (property as any).age || 0
     });
     setShowForm(true);
   };
@@ -482,7 +490,9 @@ const Admin = () => {
       currency: 'ARS',
       google_maps_link: '',
       imageUrls: [''],
-      selectedFeatures: []
+      selectedFeatures: [],
+      expenses: '',
+      age: 0
     });
     setEditingProperty(null);
     setShowForm(false);
@@ -944,7 +954,7 @@ const Admin = () => {
                   </div>
 
                   {/* Características numéricas */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Dormitorios
@@ -973,6 +983,23 @@ const Admin = () => {
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Antigüedad (años)
+                      </label>
+                      <input
+                        type="number"
+                        value={formData.age}
+                        onChange={(e) => setFormData({ ...formData, age: parseInt(e.target.value) || 0 })}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
+                        min="0"
+                        placeholder="Ej: 5"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Áreas y Expensas */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
                         Área (m²)
                       </label>
                       <input
@@ -996,6 +1023,19 @@ const Admin = () => {
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
                         min="0"
                         step="0.01"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Expensas
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.expenses}
+                        onChange={(e) => setFormData({ ...formData, expenses: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
+                        placeholder="Ej: $50,000 o No aplica"
                       />
                     </div>
                   </div>
@@ -1038,12 +1078,8 @@ const Admin = () => {
                   </div>
 
                   {/* Características booleanas */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                     {[
-                      { key: 'garage', label: 'Garage' },
-                      { key: 'pool', label: 'Piscina' },
-                      { key: 'garden', label: 'Jardín' },
-                      { key: 'furnished', label: 'Amueblado' },
                       { key: 'pets_allowed', label: 'Mascotas' },
                       { key: 'credit_eligible', label: 'Apto Crédito' },
                       { key: 'featured', label: 'Destacado' }

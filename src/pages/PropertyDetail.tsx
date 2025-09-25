@@ -312,15 +312,11 @@ const PropertyDetail = () => {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Antigüedad:</span>
-                    <span className="font-medium">5 años</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Estado:</span>
-                    <span className="font-medium">Excelente</span>
+                    <span className="font-medium">{property.age ? `${property.age} años` : 'No especificada'}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Expensas:</span>
-                    <span className="font-medium">No aplica</span>
+                    <span className="font-medium">{property.expenses || 'No aplica'}</span>
                   </div>
                 </div>
               </div>
