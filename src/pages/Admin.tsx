@@ -65,6 +65,7 @@ interface FormData {
   currency: string;
   google_maps_link: string;
   imageUrls: string[];
+  selectedFeatures?: string[];
 }
 
 const Admin = () => {
@@ -480,7 +481,8 @@ const Admin = () => {
       status: 'available',
       currency: 'ARS',
       google_maps_link: '',
-      imageUrls: ['']
+      imageUrls: [''],
+      selectedFeatures: []
     });
     setEditingProperty(null);
     setShowForm(false);
@@ -815,11 +817,22 @@ const Admin = () => {
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
                         required
                       >
-                        <option value="casa">Casa</option>
-                        <option value="departamento">Departamento</option>
-                        <option value="terreno">Terreno</option>
-                        <option value="local">Local</option>
-                        <option value="quinta">Quinta</option>
+                        <option value="">Seleccionar tipo</option>
+                        {types.map(type => (
+                          <option key={type.id} value={type.code}>
+                            {type.name}
+                          </option>
+                        ))}
+                        {/* Fallback options if no types are configured */}
+                        {types.length === 0 && (
+                          <>
+                            <option value="casa">Casa</option>
+                            <option value="departamento">Departamento</option>
+                            <option value="terreno">Terreno</option>
+                            <option value="local">Local</option>
+                            <option value="quinta">Quinta</option>
+                          </>
+                        )}
                       </select>
                     </div>
                   </div>
@@ -1049,6 +1062,37 @@ const Admin = () => {
                       </div>
                     ))}
                   </div>
+
+                  {/* Características adicionales configurables */}
+                  {features.length > 0 && (
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-4">
+                        Características Adicionales
+                      </label>
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        {features.map((feature) => (
+                          <div key={feature.id} className="flex items-center">
+                            <input
+                              type="checkbox"
+                              id={`feature-${feature.id}`}
+                              checked={formData.selectedFeatures?.includes(feature.id) || false}
+                              onChange={(e) => {
+                                const currentFeatures = formData.selectedFeatures || [];
+                                const updatedFeatures = e.target.checked
+                                  ? [...currentFeatures, feature.id]
+                                  : currentFeatures.filter(id => id !== feature.id);
+                                setFormData({ ...formData, selectedFeatures: updatedFeatures });
+                              }}
+                              className="h-4 w-4 text-[#8B1E1E] focus:ring-[#8B1E1E] border-gray-300 rounded"
+                            />
+                            <label htmlFor={`feature-${feature.id}`} className="ml-2 block text-sm text-gray-900">
+                              {feature.name}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   {/* Estado */}
                   <div>

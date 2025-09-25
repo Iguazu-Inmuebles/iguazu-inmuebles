@@ -368,14 +368,14 @@ const PropertyDetail = () => {
               {/* Contact Buttons */}
               <div className="space-y-2 mb-4">
                 <a
-                  href="tel:+543764123456"
+                  href="tel:+543757501460"
                   className="w-full flex items-center justify-center space-x-2 bg-[#1F5F2D] text-white px-4 py-2.5 rounded-lg hover:bg-[#2a7a3a] transition-colors duration-200"
                 >
                   <Phone className="w-5 h-5" />
                   <span>Llamar Ahora</span>
                 </a>
                 <a
-                  href={`https://wa.me/543764123456?text=${encodeURIComponent(`¡Hola! Me interesa la propiedad ${property.property_code || `IG-${property.id.slice(-4).toUpperCase()}`} - ${property.title}. ¿Podrían darme más información?`)}`}
+                  href={`https://wa.me/543757501460?text=${encodeURIComponent(`¡Hola! Me interesa la propiedad ${property.property_code || `IG-${property.id.slice(-4).toUpperCase()}`} - ${property.title}. ¿Podrían darme más información?`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center space-x-2 bg-[#25D366] text-white px-4 py-2.5 rounded-lg hover:bg-[#20b858] transition-colors duration-200"
@@ -386,17 +386,46 @@ const PropertyDetail = () => {
               </div>
 
               {/* Contact Form */}
-              <form className="space-y-3">
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Nombre completo"
-                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent text-sm"
-                  />
+              <form 
+                action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DgK000006UN3l" 
+                method="POST" 
+                className="space-y-3"
+              >
+                <input type="hidden" name="oid" value="00DgK000006UN3l" />
+                <input type="hidden" name="retURL" value="https://iguazuinmuebles.com" />
+                <input type="hidden" name="lead_source" value="Web" />
+                <input type="hidden" name="company" value={`${property.property_code || `IG-${property.id.slice(-4).toUpperCase()}`} - Web Contacto`} />
+                <input type="hidden" name="00NgK00001tNhdy" value="1" />
+                <input type="hidden" name="00NgK00001tQepd" value="0" />
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div>
+                    <input
+                      type="text"
+                      name="first_name"
+                      maxLength={40}
+                      required
+                      placeholder="Nombre"
+                      className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent text-sm"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      name="last_name"
+                      maxLength={80}
+                      required
+                      placeholder="Apellido"
+                      className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent text-sm"
+                    />
+                  </div>
                 </div>
                 <div>
                   <input
                     type="email"
+                    name="email"
+                    maxLength={80}
+                    required
                     placeholder="Email"
                     className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent text-sm"
                   />
@@ -404,19 +433,25 @@ const PropertyDetail = () => {
                 <div>
                   <input
                     type="tel"
+                    name="phone"
+                    maxLength={40}
+                    required
                     placeholder="Teléfono"
                     className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent text-sm"
                   />
                 </div>
                 <div>
                   <textarea
+                    name="description"
                     rows={3}
-                    placeholder={`Mensaje sobre la propiedad ${property.property_code || `IG-${property.id.slice(-4).toUpperCase()}`} (opcional)`}
+                    required
+                    placeholder={`Mensaje sobre la propiedad ${property.property_code || `IG-${property.id.slice(-4).toUpperCase()}`}`}
                     className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent resize-none text-sm"
                   ></textarea>
                 </div>
                 <button
                   type="submit"
+                  name="submit"
                   className="w-full bg-[#8B1E1E] text-white px-4 py-2.5 rounded-lg hover:bg-[#a52525] transition-colors duration-200 font-medium"
                 >
                   Enviar Consulta
