@@ -396,6 +396,29 @@ const Admin = () => {
         }
       }
 
+      // Guardar características seleccionadas
+      if (editingProperty) {
+        // Eliminar características existentes
+        await supabase
+          .from('property_features')
+          .delete()
+          .eq('property_id', propertyId);
+      }
+
+      // Insertar nuevas características seleccionadas
+      if (formData.selectedFeatures && formData.selectedFeatures.length > 0) {
+        const featureData = formData.selectedFeatures.map(featureId => ({
+          property_id: propertyId,
+          feature_id: featureId
+        }));
+
+        const { error: featuresError } = await supabase
+          .from('property_features')
+          .insert(featureData);
+
+        if (featuresError) throw featuresError;
+      }
+
       await fetchProperties();
       resetForm();
     } catch (error) {
@@ -406,11 +429,19 @@ const Admin = () => {
     }
   };
 
-  const handleEdit = (property: Property) => {
+  const handleEdit = async (property: Property) => {
     setEditingProperty(property);
     
     // Extraer URLs de imágenes existentes
     const existingUrls = property.property_images?.map(img => img.image_url) || [''];
+    
+    // Cargar características seleccionadas de la propiedad
+    const { data: propertyFeatures } = await supabase
+      .from('property_features')
+      .select('feature_id')
+      .eq('property_id', property.id);
+    
+    const selectedFeatureIds = propertyFeatures?.map(pf => pf.feature_id) || [];
     
     setFormData({
       title: property.title,
@@ -438,7 +469,7 @@ const Admin = () => {
       currency: property.currency || 'ARS',
       google_maps_link: property.google_maps_link || '',
       imageUrls: existingUrls.length > 0 ? existingUrls : [''],
-      selectedFeatures: [],
+      selectedFeatures: selectedFeatureIds,
       expenses: (property as any).expenses || '',
       age: (property as any).age || 0
     });
@@ -1082,7 +1113,6 @@ const Admin = () => {
                   {/* Características booleanas */}
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                     {[
-                      { key: 'pets_allowed', label: 'Mascotas' },
                       { key: 'credit_eligible', label: 'Apto Crédito' },
                       { key: 'featured', label: 'Destacado' }
                     ].map(({ key, label }) => (
