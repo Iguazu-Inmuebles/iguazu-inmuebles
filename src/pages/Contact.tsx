@@ -56,7 +56,7 @@ const Contact = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-white">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Contactanos
+              Contacto - Inmobiliaria Puerto Iguazú
             </h1>
             <p className="text-xl md:text-2xl max-w-2xl mx-auto">
               Estamos aquí para ayudarte a encontrar tu hogar ideal. ¡Hablemos!

@@ -20,12 +20,12 @@ const Hero = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
         <div className="text-center w-full">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 font-lato">
-            Encuentra tu hogar ideal en{' '}
-            <span className="text-[#FFD700]">Iguazu</span>
+            Inmobiliaria en Puerto Iguazú{' '}
+            <span className="text-[#FFD700]">Misiones</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto font-lato">
-            Más de 10 años conectando familias con sus hogares soñados. 
-            Descubre las mejores propiedades en venta y alquiler.
+            Más de 20 años conectando familias con sus hogares soñados en Puerto Iguazú. 
+            Casas, departamentos y terrenos en venta y alquiler.
           </p>
           
           {/* Action Buttons */}

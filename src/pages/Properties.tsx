@@ -389,7 +389,7 @@ const Properties = () => {
       <div className="bg-white shadow-sm border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-gray-900">Todas las Propiedades</h1>
+            <h1 className="text-2xl font-bold text-gray-900">Propiedades en Venta y Alquiler en Puerto Iguazú</h1>
             <div className="flex items-center space-x-2">
             <button
               onClick={() => setViewMode('grid')}

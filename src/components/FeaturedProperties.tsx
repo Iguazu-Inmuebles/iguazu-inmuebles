@@ -89,7 +89,7 @@ const FeaturedProperties = () => {
               <div className="relative">
                 <img
                   src={coverImage?.image_url || 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=800'}
-                  alt={property.title}
+                  alt={`${property.property_type} en ${property.operation} - ${property.title} - Puerto Iguazú, Misiones - Inmobiliaria Iguazú`}
                   className="w-full h-48 object-cover"
                 />
                 <div className="absolute top-4 left-4">

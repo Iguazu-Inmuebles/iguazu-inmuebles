@@ -13,7 +13,7 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <div className="flex flex-col font-lato">
-                <img className="h-36" src="https://i.imgur.com/2yEP9bw.png" alt="Estrella PNG" />
+                <img className="h-36" src="https://i.imgur.com/2yEP9bw.png" alt="Logo Iguazú Inmuebles - Inmobiliaria en Puerto Iguazú, Misiones" />
                 {/* <span className="text-2xl font-bold text-[#8B1E1E]">IGUAZÚ</span>
                 <span className="text-lg font-semibold text-[#1F5F2D] -mt-1">INMUEBLES</span> */}
               </div>

@@ -101,7 +101,7 @@ const Valuations = () => {
           <div className="text-center text-white">
             <Calculator className="w-16 h-16 mx-auto mb-4" />
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Tasación de Propiedades
+              Tasación de Propiedades en Puerto Iguazú
             </h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto">
               Conoce el valor real de tu propiedad con nuestra tasación profesional 

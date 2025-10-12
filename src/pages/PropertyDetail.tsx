@@ -147,6 +147,71 @@ const PropertyDetail = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Schema.org Structured Data for Property */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "RealEstateListing",
+          "name": property.title,
+          "description": property.description || `${property.property_type} en ${property.operation} en Puerto Iguazú, Misiones`,
+          "url": `https://iguazuinmuebles.com/propiedades/${property.id}`,
+          "image": images.length > 0 ? images.map(img => img.image_url) : ["https://iguazuinmuebles.com/logo.png"],
+          "datePosted": property.created_at,
+          "validThrough": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString(),
+          "price": property.price || 0,
+          "priceCurrency": property.currency || "ARS",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "price": property.price || 0,
+            "priceCurrency": property.currency || "ARS"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": property.address,
+            "addressLocality": "Puerto Iguazú",
+            "addressRegion": "Misiones",
+            "postalCode": "3370",
+            "addressCountry": "AR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "-25.5948",
+            "longitude": "-54.5756"
+          },
+          "floorSize": {
+            "@type": "QuantitativeValue",
+            "value": property.area || 0,
+            "unitCode": "MTK"
+          },
+          "lotSize": {
+            "@type": "QuantitativeValue", 
+            "value": property.lot_area || 0,
+            "unitCode": "MTK"
+          },
+          "numberOfRooms": property.bedrooms,
+          "numberOfBathroomsTotal": property.bathrooms,
+          "propertyType": property.property_type,
+          "yearBuilt": property.age ? new Date().getFullYear() - property.age : null,
+          "agent": {
+            "@type": "RealEstateAgent",
+            "name": "Iguazú Inmuebles",
+            "url": "https://iguazuinmuebles.com",
+            "telephone": "+54-3757-501460",
+            "email": "info@iguazuinmuebles.com"
+          },
+          "offers": {
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "price": property.price || 0,
+            "priceCurrency": property.currency || "ARS",
+            "seller": {
+              "@type": "RealEstateAgent",
+              "name": "Iguazú Inmuebles"
+            }
+          }
+        })}
+      </script>
+
       {/* Breadcrumb */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -170,7 +235,7 @@ const PropertyDetail = () => {
                 <div className="relative cursor-pointer group" onClick={() => openImageModal(currentImageIndex)}>
                   <img
                     src={images[currentImageIndex]?.image_url || 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1200'}
-                    alt={property.title}
+                    alt={`${property.property_type} en ${property.operation} - ${property.title} - Puerto Iguazú, Misiones`}
                     className="w-full h-96 object-cover transition-transform duration-200 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-200 flex items-center justify-center">
@@ -223,7 +288,7 @@ const PropertyDetail = () => {
                     >
                       <img
                         src={image.image_url}
-                        alt={`Vista ${index + 1}`}
+                        alt={`Vista ${index + 1} de ${property.property_type} en ${property.operation} - ${property.title} - Puerto Iguazú`}
                         className="w-full h-20 object-cover"
                       />
                       <div className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-colors duration-200 flex items-center justify-center">

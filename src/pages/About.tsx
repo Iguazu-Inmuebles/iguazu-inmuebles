@@ -60,7 +60,7 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-white">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Quiénes Somos
+              Inmobiliaria Iguazú - Quiénes Somos
             </h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto">
             Somos una inmobiliaria con raíces profundas en Puerto Iguazú. Nuestro equipo combina experiencia, profesionalismo y un trato humano para ofrecer un servicio integral que abarca compra/venta de propiedades, administración de alquileres, tasaciones e informes de valuación. Nuestra filosofía se basa en escuchar, asesorar y acompañar, brindando respuestas concretas y personalizadas para cada necesidad.
@@ -103,7 +103,7 @@ const About = () => {
             <div>
               <img
                 src="/iguazu.jpg"
-                alt="Equipo Iguazú Inmuebles"
+                alt="Oficina Iguazú Inmuebles en Puerto Iguazú, Misiones - Inmobiliaria con más de 20 años de experiencia"
                 className="rounded-xl shadow-lg w-full"
               />
             </div>
@@ -174,7 +174,7 @@ const About = () => {
               <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden">
                 <img
                   src={member.image}
-                  alt={member.name}
+                  alt={`${member.name} - ${member.role} en Iguazú Inmuebles, Puerto Iguazú`}
                   className="w-full object-cover"
                 />
                 <div className="p-6">
