@@ -677,13 +677,39 @@ const AdminConfig = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Ciudad
                     </label>
-                    <input
-                      type="text"
+                    <select
                       value={zoneForm.city}
                       onChange={(e) => setZoneForm({ ...zoneForm, city: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-[#8B1E1E] focus:border-[#8B1E1E]"
                       required
-                    />
+                    >
+                      <option value="">Seleccionar ciudad</option>
+                      {zoneForm.province === 'Misiones' && (
+                        <>
+                          <option value="Posadas">Posadas</option>
+                          <option value="Oberá">Oberá</option>
+                          <option value="Eldorado">Eldorado</option>
+                          <option value="Puerto Iguazú">Puerto Iguazú</option>
+                          <option value="Apóstoles">Apóstoles</option>
+                        </>
+                      )}
+                      {zoneForm.province === 'Corrientes' && (
+                        <>
+                          <option value="Corrientes">Corrientes</option>
+                          <option value="Goya">Goya</option>
+                          <option value="Mercedes">Mercedes</option>
+                          <option value="Paso de los Libres">Paso de los Libres</option>
+                        </>
+                      )}
+                      {zoneForm.province === 'Entre Ríos' && (
+                        <>
+                          <option value="Paraná">Paraná</option>
+                          <option value="Concordia">Concordia</option>
+                          <option value="Gualeguaychú">Gualeguaychú</option>
+                          <option value="Concepción del Uruguay">Concepción del Uruguay</option>
+                        </>
+                      )}
+                    </select>
                   </div>
                 </div>
 

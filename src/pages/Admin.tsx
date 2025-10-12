@@ -175,11 +175,29 @@ const Admin = () => {
 
   // Filtrar zonas según provincia y ciudad seleccionadas
   const getFilteredZones = () => {
-    return zones.filter(zone => 
-      zone.is_active && 
-      zone.province.toLowerCase() === formData.province.toLowerCase() &&
-      zone.city.toLowerCase() === formData.city.toLowerCase()
-    );
+    console.log('=== DEBUG FILTRADO DE ZONAS ===');
+    console.log('formData.province:', formData.province);
+    console.log('formData.city:', formData.city);
+    console.log('zones disponibles:', zones);
+    
+    const filtered = zones.filter(zone => {
+      const isActive = zone.is_active;
+      const provinceMatch = zone.province.toLowerCase() === formData.province.toLowerCase();
+      const cityMatch = zone.city.toLowerCase() === formData.city.toLowerCase();
+      
+      console.log(`Zona: ${zone.name}`);
+      console.log(`  - is_active: ${isActive}`);
+      console.log(`  - province: "${zone.province}" vs "${formData.province}" = ${provinceMatch}`);
+      console.log(`  - city: "${zone.city}" vs "${formData.city}" = ${cityMatch}`);
+      console.log(`  - incluida: ${isActive && provinceMatch && cityMatch}`);
+      
+      return isActive && provinceMatch && cityMatch;
+    });
+    
+    console.log('zonas filtradas:', filtered);
+    console.log('=== FIN DEBUG ===');
+    
+    return filtered;
   };
 
   // Formatear precio según moneda
