@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Bed, Bath, Car, MapPin, Eye, Filter, Grid, List, X, Home, ChevronDown } from 'lucide-react';
 import { supabase, Property, PropertyZone, PropertyFeature } from '../lib/supabase';
+import { validatePrice } from '../utils/validation';
+import { sanitizePropertyDescription } from '../utils/sanitization';
 
 const Properties = () => {
   const [properties, setProperties] = useState<Property[]>([]);
@@ -185,14 +187,18 @@ const Properties = () => {
 
     // Filtro por precio mínimo
     if (filters.minPrice) {
-      const minPrice = parseFloat(filters.minPrice);
-      if (!property.price || property.price < minPrice) return false;
+      const minPriceValidation = validatePrice(filters.minPrice);
+      if (minPriceValidation.isValid && minPriceValidation.value !== null) {
+        if (!property.price || property.price < minPriceValidation.value) return false;
+      }
     }
 
     // Filtro por precio máximo
     if (filters.maxPrice) {
-      const maxPrice = parseFloat(filters.maxPrice);
-      if (!property.price || property.price > maxPrice) return false;
+      const maxPriceValidation = validatePrice(filters.maxPrice);
+      if (maxPriceValidation.isValid && maxPriceValidation.value !== null) {
+        if (!property.price || property.price > maxPriceValidation.value) return false;
+      }
     }
 
     // Filtros dinámicos por características usando properties_features
@@ -333,7 +339,7 @@ const Properties = () => {
         <h3 className="text-lg font-semibold text-gray-900 mb-2">{property.title}</h3>
         
         <p className="text-gray-600 text-xs mb-3 line-clamp-2">
-          {property.description || 'Excelente propiedad disponible.'}
+          {property.description ? sanitizePropertyDescription(property.description) : 'Excelente propiedad disponible.'}
         </p>
 
         {/* Features */}

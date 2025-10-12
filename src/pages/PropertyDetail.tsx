@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { supabase, Property, PropertyZone } from '../lib/supabase';
+import { sanitizePropertyDescription } from '../utils/sanitization';
 import { 
   Bed, 
   Bath, 
@@ -276,7 +277,7 @@ const PropertyDetail = () => {
               {property.description && (
                 <div className="mb-8">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Descripción</h3>
-                <p className="text-gray-700 leading-relaxed">{property.description}</p>
+                <div className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: sanitizePropertyDescription(property.description) }} />
               </div>
               )}
 

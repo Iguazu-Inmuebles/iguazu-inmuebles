@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Bed, Bath, Car, MapPin, Eye, Star } from 'lucide-react';
 import { supabase, Property } from '../lib/supabase';
+import { sanitizePropertyDescription } from '../utils/sanitization';
 
 const FeaturedProperties = () => {
   const [properties, setProperties] = React.useState<Property[]>([]);
@@ -117,8 +118,8 @@ const FeaturedProperties = () => {
                 
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{property.title}</h3>
                 
-                <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                  {property.description || 'Excelente propiedad disponible.'}
+                <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                  {property.description ? sanitizePropertyDescription(property.description) : 'Excelente propiedad disponible.'}
                 </p>
 
                 {/* Features */}
