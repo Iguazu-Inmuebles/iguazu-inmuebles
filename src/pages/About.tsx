@@ -35,21 +35,21 @@ const About = () => {
   const team = [
     {
       name: "Karina Vier",
-      role: "Martillera Pública",
+      role: "Dirección General",
       image: "/Karina-Vier.png",
-      description: "15 años de experiencia en el sector inmobiliario de Misiones."
+      description: "Más de 20 años de experiencia en el rubro inmobiliario en Misiones. Lidera Iguazú Inmuebles con compromiso, ética y una atención personalizada que marca la diferencia. Su pasión y dedicación son el motor del equipo."
     },
     {
       name: "Miguel Rodríguez",
-      role: "Tasador",
+      role: "Gerente Comercial",
       image: "/Miguel-Rodriguez.png",
-      description: "Especialista en propiedades comerciales y residenciales de alta gama."
+      description: "Brinda asesoramiento claro y confiable a cada cliente. Con una visión precisa del mercado, combina empatía y profesionalismo para lograr resultados. Un pilar clave en este emprendimiento."
     },
     {
       name: "Gabriel Rodríguez",
-      role: "Maestro Mayor de Obra",
+      role: "Nueva Generación Inmobiliaria",
       image: "/Gabriel-Rodriguez.png",
-      description: "Técnico con formación integral para planificar, conducir y supervisar obras edilicias."
+      description: "Aporta una mirada joven e innovadora, siguiendo los valores familiares que dieron vida a Iguazú Inmuebles. Su energía y compromiso reflejan el futuro del proyecto."
     }
   ];
 
