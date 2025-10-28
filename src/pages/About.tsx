@@ -175,7 +175,7 @@ const About = () => {
                 <img
                   src={member.image}
                   alt={`${member.name} - ${member.role} en Iguazú Inmuebles, Puerto Iguazú`}
-                  className="w-full object-cover"
+                  className="w-full object-cover p-4"
                 />
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-900 mb-1">{member.name}</h3>
