@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Bed, Bath, Car, MapPin, Eye, Filter, Grid, List, X, Home, ChevronDown } from 'lucide-react';
-import { supabase, Property, PropertyZone, PropertyFeature } from '../lib/supabase';
+import { supabase, Property, PropertyZone, PropertyFeature, PropertyType } from '../lib/supabase';
 import { validatePrice } from '../utils/validation';
 import { sanitizePropertyDescription } from '../utils/sanitization';
 
@@ -9,6 +9,7 @@ const Properties = () => {
   const [properties, setProperties] = useState<Property[]>([]);
   const [zones, setZones] = useState<PropertyZone[]>([]);
   const [features, setFeatures] = useState<PropertyFeature[]>([]);
+  const [propertyTypes, setPropertyTypes] = useState<PropertyType[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -29,6 +30,7 @@ const Properties = () => {
     fetchProperties();
     fetchZones();
     fetchFeatures();
+    fetchPropertyTypes();
   }, []);
 
   const fetchProperties = async () => {
@@ -100,10 +102,41 @@ const Properties = () => {
     }
   };
 
+  const fetchPropertyTypes = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('property_types')
+        .select('*')
+        .eq('is_active', true)
+        .order('name');
+
+      if (error) throw error;
+      setPropertyTypes(data || []);
+    } catch (error) {
+      console.error('Error fetching property types:', error);
+    }
+  };
+
   const formatPrice = (price: number, currency: string) => {
     const formatter = new Intl.NumberFormat('es-AR');
     const symbol = currency === 'USD' ? 'US$' : '$';
     return `${symbol} ${formatter.format(price)}`;
+  };
+
+  // Generate property type options from fetched data
+  const getPropertyTypeOptions = () => {
+    const options = [
+      { value: "", label: "Todos" }
+    ];
+    
+    propertyTypes.forEach(type => {
+      options.push({
+        value: type.code,
+        label: type.name
+      });
+    });
+    
+    return options;
   };
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -472,14 +505,7 @@ const Properties = () => {
                       name="propertyType"
                       value={filters.propertyType}
                       onChange={handleFilterChange}
-                      options={[
-                        { value: "", label: "Todos" },
-                        { value: "casa", label: "Casa" },
-                        { value: "departamento", label: "Departamento" },
-                        { value: "terreno", label: "Terreno" },
-                        { value: "local", label: "Local" },
-                        { value: "quinta", label: "Quinta" }
-                      ]}
+                      options={getPropertyTypeOptions()}
                       placeholder="Todos"
                     />
                   </div>
