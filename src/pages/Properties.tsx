@@ -243,17 +243,7 @@ const Properties = () => {
           (pf: any) => pf.property_features?.code === feature.code
         );
         
-        // Debug: Log para verificar el filtrado
-        console.log(`Filtering by ${feature.name} (${feature.code}):`, {
-          propertyId: property.id,
-          propertyTitle: property.title,
-          hasFeature,
-          propertyFeatures: property.properties_features?.map((pf: any) => ({
-            featureId: pf.feature_id,
-            featureName: pf.property_features?.name,
-            featureCode: pf.property_features?.code
-          }))
-        });
+        // Verificar si la propiedad tiene esta característica
         
         // Si no tiene la característica, excluir la propiedad
         if (!hasFeature) {

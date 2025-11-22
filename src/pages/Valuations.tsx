@@ -21,7 +21,6 @@ const Valuations = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Valuation request submitted:', formData);
     setIsSubmitted(true);
     
     setTimeout(() => {

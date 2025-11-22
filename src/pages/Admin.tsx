@@ -5,15 +5,6 @@ import { Link } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import AdminLogin from '../components/AdminLogin';
 
-interface PropertyImage {
-  id: string;
-  property_id: string;
-  image_url: string;
-  alt_text?: string;
-  order_index: number;
-  is_cover: boolean;
-}
-
 interface PropertyZone {
   id: string;
   name: string;
@@ -175,27 +166,13 @@ const Admin = () => {
 
   // Filtrar zonas según provincia y ciudad seleccionadas
   const getFilteredZones = () => {
-    console.log('=== DEBUG FILTRADO DE ZONAS ===');
-    console.log('formData.province:', formData.province);
-    console.log('formData.city:', formData.city);
-    console.log('zones disponibles:', zones);
-    
     const filtered = zones.filter(zone => {
       const isActive = zone.is_active;
       const provinceMatch = zone.province.toLowerCase() === formData.province.toLowerCase();
       const cityMatch = zone.city.toLowerCase() === formData.city.toLowerCase();
       
-      console.log(`Zona: ${zone.name}`);
-      console.log(`  - is_active: ${isActive}`);
-      console.log(`  - province: "${zone.province}" vs "${formData.province}" = ${provinceMatch}`);
-      console.log(`  - city: "${zone.city}" vs "${formData.city}" = ${cityMatch}`);
-      console.log(`  - incluida: ${isActive && provinceMatch && cityMatch}`);
-      
       return isActive && provinceMatch && cityMatch;
     });
-    
-    console.log('zonas filtradas:', filtered);
-    console.log('=== FIN DEBUG ===');
     
     return filtered;
   };
@@ -211,6 +188,28 @@ const Admin = () => {
       return number.toLocaleString('en-US');
     } else {
       return number.toLocaleString('es-AR');
+    }
+  };
+
+  // Handle numeric input fields to improve UX
+  const handleNumericInput = (field: string, value: string, allowDecimal: boolean = false) => {
+    // Remove non-numeric characters (except decimal point if allowed)
+    const cleanValue = allowDecimal 
+      ? value.replace(/[^\d.]/g, '').replace(/(\..*?)\..*/g, '$1')
+      : value.replace(/[^\d]/g, '');
+    
+    // If empty or just 0, allow empty input
+    if (cleanValue === '' || cleanValue === '0') {
+      setFormData({ ...formData, [field]: cleanValue });
+      return;
+    }
+    
+    // Parse the number
+    const number = allowDecimal ? parseFloat(cleanValue) : parseInt(cleanValue);
+    
+    // Only update if it's a valid number
+    if (!isNaN(number)) {
+      setFormData({ ...formData, [field]: cleanValue });
     }
   };
 
@@ -488,8 +487,8 @@ const Admin = () => {
       google_maps_link: property.google_maps_link || '',
       imageUrls: existingUrls.length > 0 ? existingUrls : [''],
       selectedFeatures: selectedFeatureIds,
-      expenses: (property as any).expenses || '',
-      age: (property as any).age || 0
+      expenses: property.expenses || '',
+      age: property.age || 0
     });
     setShowForm(true);
   };
@@ -1013,7 +1012,8 @@ const Admin = () => {
                       <input
                         type="number"
                         value={formData.bedrooms}
-                        onChange={(e) => setFormData({ ...formData, bedrooms: parseInt(e.target.value) || 0 })}
+                        onChange={(e) => handleNumericInput('bedrooms', e.target.value)}
+                        onFocus={(e) => e.target.select()} // Select all text on focus
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
                         min="0"
                       />
@@ -1026,7 +1026,8 @@ const Admin = () => {
                       <input
                         type="number"
                         value={formData.bathrooms}
-                        onChange={(e) => setFormData({ ...formData, bathrooms: parseInt(e.target.value) || 0 })}
+                        onChange={(e) => handleNumericInput('bathrooms', e.target.value)}
+                        onFocus={(e) => e.target.select()}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
                         min="0"
                       />
@@ -1039,7 +1040,8 @@ const Admin = () => {
                       <input
                         type="number"
                         value={formData.age}
-                        onChange={(e) => setFormData({ ...formData, age: parseInt(e.target.value) || 0 })}
+                        onChange={(e) => handleNumericInput('age', e.target.value)}
+                        onFocus={(e) => e.target.select()}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
                         min="0"
                         placeholder="Ej: 5"
@@ -1056,7 +1058,8 @@ const Admin = () => {
                       <input
                         type="number"
                         value={formData.area}
-                        onChange={(e) => setFormData({ ...formData, area: e.target.value })}
+                        onChange={(e) => handleNumericInput('area', e.target.value, true)}
+                        onFocus={(e) => e.target.select()}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
                         min="0"
                         step="0.01"
@@ -1070,7 +1073,8 @@ const Admin = () => {
                       <input
                         type="number"
                         value={formData.lot_area}
-                        onChange={(e) => setFormData({ ...formData, lot_area: e.target.value })}
+                        onChange={(e) => handleNumericInput('lot_area', e.target.value, true)}
+                        onFocus={(e) => e.target.select()}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1E1E] focus:border-transparent"
                         min="0"
                         step="0.01"
