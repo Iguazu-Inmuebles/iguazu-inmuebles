@@ -26,7 +26,7 @@ export interface Property {
   description?: string;
   price: number;
   operation: 'venta' | 'alquiler';
-  property_type: 'casa' | 'departamento' | 'terreno' | 'local' | 'quinta';
+  property_type: 'casa' | 'departamento' | 'terreno' | 'local' | 'quinta' | 'oficina' | 'galpon';
   currency: 'ARS' | 'USD';
   bedrooms: number;
   bathrooms: number;

@@ -37,13 +37,14 @@ const Hero = () => {
               <Search className="w-6 h-6" />
               <span>Ver Propiedades</span>
             </Link>
-            <Link
+            {/* <!-- <Link
               to="/tasaciones"
               className="bg-[#1F5F2D] text-white px-8 py-4 rounded-lg hover:bg-[#2a7a3a] transition-colors duration-200 flex items-center space-x-2 text-lg font-semibold"
             >
               <Calculator className="w-6 h-6" />
               <span>Solicitar Tasación</span>
-            </Link>
+            </Link> */}
+            
           </div>
         </div>
       </div>
